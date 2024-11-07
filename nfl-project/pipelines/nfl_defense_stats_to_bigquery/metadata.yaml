@@ -76,7 +76,8 @@ run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags: []
+tags:
+- nfl_defense
 type: python
 uuid: nfl_defense_stats_to_bigquery
 variables_dir: /home/src/mage_data/nfl-project

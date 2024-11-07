@@ -26,13 +26,13 @@ blocks:
   language: python
   name: transform weekly csv
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: transformer
   upstream_blocks:
   - load_weekly_nfl_data_gcs
   uuid: transform_weekly_csv
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     data_provider: bigquery
@@ -44,7 +44,8 @@ blocks:
     export_write_policy: append
     limit: 1000
     use_raw_sql: false
-  downstream_blocks: []
+  downstream_blocks:
+  - trigger_yds_and_fantasy_pipeline
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -57,6 +58,26 @@ blocks:
   upstream_blocks:
   - transform_weekly_csv
   uuid: weekly_nfl_data_to_bigquery
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: bigquery
+    data_provider_profile: default
+    data_provider_schema: nfl_db
+    export_write_policy: append
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: trigger yds and fantasy pipeline
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - weekly_nfl_data_to_bigquery
+  uuid: trigger_yds_and_fantasy_pipeline
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -76,7 +97,8 @@ run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags: []
+tags:
+- nfl_weekly
 type: python
 uuid: weekly_nfl_data_to_bigquery
 variables_dir: /home/src/mage_data/nfl-project

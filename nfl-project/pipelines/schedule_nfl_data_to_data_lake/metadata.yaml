@@ -18,7 +18,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - trigger_schedule_nfl_data_to_bigquery
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -31,6 +32,22 @@ blocks:
   upstream_blocks:
   - scrape_schedule_data
   uuid: export_schedule_data_to_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: trigger schedule nfl data to bigquery
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - export_schedule_data_to_gcs
+  uuid: trigger_schedule_nfl_data_to_bigquery
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -50,7 +67,8 @@ run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags: []
+tags:
+- nfl_schedule
 type: python
 uuid: schedule_nfl_data_to_data_lake
 variables_dir: /home/src/mage_data/nfl-project

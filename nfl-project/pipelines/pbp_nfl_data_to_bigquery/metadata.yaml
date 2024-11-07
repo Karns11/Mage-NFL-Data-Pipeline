@@ -76,7 +76,8 @@ run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags: []
+tags:
+- nfl_pbp
 type: python
 uuid: pbp_nfl_data_to_bigquery
 variables_dir: /home/src/mage_data/nfl-project

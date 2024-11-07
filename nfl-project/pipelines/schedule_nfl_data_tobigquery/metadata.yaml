@@ -77,7 +77,8 @@ run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags: []
+tags:
+- nfl_schedule
 type: python
 uuid: schedule_nfl_data_tobigquery
 variables_dir: /home/src/mage_data/nfl-project

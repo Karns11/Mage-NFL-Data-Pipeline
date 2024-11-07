@@ -3,42 +3,42 @@ blocks:
   color: null
   configuration: {}
   downstream_blocks:
-  - transform_seasonal_data_to_bigquery
+  - transform_weekly_nfl_data
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: load_seasonal_data_from_data_lake
+  name: load weekly nfl data
   retry_config: null
   status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
-  uuid: load_seasonal_data_from_data_lake
+  uuid: load_weekly_nfl_data
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
-  - export_seasonal_data_to_bigquery
+  - export_to_bigquery
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: transform_seasonal_data_to_bigquery
+  name: transform weekly nfl data
   retry_config: null
   status: executed
   timeout: null
   type: transformer
   upstream_blocks:
-  - load_seasonal_data_from_data_lake
-  uuid: transform_seasonal_data_to_bigquery
+  - load_weekly_nfl_data
+  uuid: transform_weekly_nfl_data
 - all_upstream_blocks_executed: true
   color: null
   configuration:
     data_provider: bigquery
     data_provider_profile: default
     data_provider_schema: nfl_db
-    data_provider_table: seasonal_nfl_data
+    data_provider_table: weekly_nfl_def_fantasy_yds
     dbt: {}
     disable_query_preprocessing: false
     export_write_policy: append
@@ -49,26 +49,26 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: sql
-  name: export_seasonal_data_to_bigquery
+  name: export to bigquery
   retry_config: null
   status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
-  - transform_seasonal_data_to_bigquery
-  uuid: export_seasonal_data_to_bigquery
+  - transform_weekly_nfl_data
+  uuid: export_to_bigquery
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2024-09-09 21:33:09.954640+00:00'
+created_at: '2024-10-05 00:08:45.011091+00:00'
 data_integration: null
 description: null
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: seasonal_nfl_data_to_bigquery
+name: TeamFantasyAndYdsAllowedPg_to_bigquery
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -77,8 +77,8 @@ settings:
   triggers: null
 spark_config: {}
 tags:
-- nfl_seasonal
+- nfl_fantasy_yds_allowed_process
 type: python
-uuid: seasonal_nfl_data_to_bigquery
+uuid: teamfantasyandydsallowedpg_to_bigquery
 variables_dir: /home/src/mage_data/nfl-project
 widgets: []
